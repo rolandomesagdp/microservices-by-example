@@ -3,7 +3,7 @@ services:
     build: rolandomesa-ng
     ports:
     - 4201:4200
-  rolamdomesa-gdp-net-core-api:
+  rolamdomesa-netcore-api:
     build: 
       context: ./RolandoMesaGdpApi
       dockerfile: ./RolandoMesaGdpApi/Dockerfile
