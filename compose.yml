@@ -1,11 +1,12 @@
 services:
-  rolandomesa-ng-app:
-    build: rolandomesa-ng
-    ports:
-    - 4201:4200
+  # rolandomesa-ng-app:
+  #   build: rolandomesa-ng
+  #   ports:
+  #   - 4201:4200
   rolamdomesa-netcore-api:
-    build: 
+    build:
       context: ./RolandoMesaGdpApi
       dockerfile: ./RolandoMesaGdpApi/Dockerfile
+    image: rolandomesagdp-api:latest
     ports:
     - 32771:8080
