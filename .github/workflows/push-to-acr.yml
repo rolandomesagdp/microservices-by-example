@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.AZ_SP_CLIENT_SECRET }}
 
       - name: Build Docker image
-        run: docker-compose build
+        run: docker compose build
 
       - name: Push Docker image to Azure Container Registry
         run: |
