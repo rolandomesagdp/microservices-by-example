@@ -16,3 +16,6 @@ You should have Docker and Docker Compose installed
 4- Go to <http://localhost:4021>: You should see an angular app with the following message printed on the screen:
 
 # "Weather forecast registries count: 5"
+
+## Github Action:
+In order for the github action yml file to properly work, an Azure CR registry is required.
