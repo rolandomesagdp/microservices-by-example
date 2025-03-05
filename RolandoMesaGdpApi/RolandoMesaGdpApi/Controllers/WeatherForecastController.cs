@@ -6,27 +6,49 @@ namespace RolandoMesaGdpApi.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+  private readonly ILogger<WeatherForecastController> _logger;
 
-    private readonly ILogger<WeatherForecastController> _logger;
+  public WeatherForecastController(ILogger<WeatherForecastController> logger)
+  {
+    _logger = logger;
+  }
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
-    {
-        _logger = logger;
-    }
-
-    [HttpGet]
-    public IEnumerable<WeatherForecast> Get()
-    {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+  [HttpGet]
+  public IEnumerable<WeatherForecast> Get()
+  {
+    var list = new List<WeatherForecast>()
         {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
-    }
+            new WeatherForecast()
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now),
+                TemperatureC = 20,
+                Summary = "Freezing"
+            },
+            new WeatherForecast()
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now),
+                TemperatureC = 20,
+                Summary = "Bracing"
+            },
+            new WeatherForecast()
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now),
+                TemperatureC = 20,
+                Summary = "Chilly"
+            },
+            new WeatherForecast()
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now),
+                TemperatureC = 20,
+                Summary = "Warm"
+            },
+            new WeatherForecast()
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now),
+                TemperatureC = 20,
+                Summary = "Hot"
+            }
+        };
+    return list;
+  }
 }
