@@ -74,3 +74,20 @@ jobs:
 
       - name: Pushing Insurance Pricer image to Docker Hub
         run: docker push rolandomesagdp/insurance_pricer:latest
+
+  build_and_push_frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Build Angular Frontend Docker image
+        working-directory: ./micro-services-front
+        run: docker build -t rolandomesagdp/front_rmesa_ng:latest -f Dockerfile .
+
+      - name: Login to Docker Hub
+        run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Pushing Frontend image to Docker Hub
+        run: docker push rolandomesagdp/front_rmesa_ng:latest
