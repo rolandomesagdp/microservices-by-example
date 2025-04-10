@@ -1,8 +1,3 @@
-# services:
-  # rolandomesa-ng-app:
-  #   build: rolandomesa-ng
-  #   ports:
-  #   - 4201:4200
   services:
     external_factors_sql_db:
         image: mcr.microsoft.com/mssql/server:2022-latest
@@ -66,3 +61,18 @@
             - Endpoints:InsuranceOffersApi=http://insurance_offers_api:8080
         ports:
             - "5103:8080"
+    angular_front:
+        image: rolandomesagdp/front_rmesa_ng
+        pull_policy: always
+        container_name: front_rmesa_container
+        ports:
+            - "4201:80"
+
+    # angular_front:
+    #     build:
+    #       context: ./micro-services-front
+    #       dockerfile: ./Dockerfile
+    #     image: front_rmesa_image:latest
+    #     container_name: front_rmesa_container
+    #     ports:
+    #         - "4201:80"
