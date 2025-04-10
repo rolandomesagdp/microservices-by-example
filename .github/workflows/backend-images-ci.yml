@@ -15,7 +15,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build External Factors Docker image
-        run: docker build -t rolandomesagdp/external_factors:latest -f micro-services-backends/src/ExternalFactors.Api/Dockerfile ./micro-services-backends
+        working-directory: ./micro-services-backends
+        run: docker build -t rolandomesagdp/external_factors:latest -f src/ExternalFactors.Api/Dockerfile .
 
       - name: Login to Docker Hub
         run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_TOKEN }}
