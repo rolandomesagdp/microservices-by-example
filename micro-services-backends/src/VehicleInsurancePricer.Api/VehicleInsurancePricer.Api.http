@@ -1,0 +1,6 @@
+@VehicleInsurancePricer.Api_HostAddress = http://localhost:5102
+
+GET {{VehicleInsurancePricer.Api_HostAddress}}/insuranceprice/
+Accept: application/json
+
+###

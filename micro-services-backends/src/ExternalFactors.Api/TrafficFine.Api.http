@@ -1,0 +1,6 @@
+@TrafficFine.Api_HostAddress = http://localhost:5146
+
+GET {{TrafficFine.Api_HostAddress}}/fine/
+Accept: application/json
+
+###
