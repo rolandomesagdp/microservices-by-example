@@ -1,12 +1,68 @@
-services:
+# services:
   # rolandomesa-ng-app:
   #   build: rolandomesa-ng
   #   ports:
   #   - 4201:4200
-  rolamdomesa-netcore-api:
-    build:
-      context: ./RolandoMesaGdpApi
-      dockerfile: ./RolandoMesaGdpApi/Dockerfile
-    image: rolandomesagdp-api:latest
-    ports:
-    - 32771:8080
+  services:
+    external_factors_sql_db:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        container_name: external_factors_sql_container
+        volumes:
+            - ./docker-volumes/ExternalFactorsDb/data:/var/opt/mssql/data
+            - ./docker-volumes/ExternalFactorsDb/log:/var/opt/mssql/log
+            - ./docker-volumes/ExternalFactorsDb/secrets:/var/opt/mssql/secrets
+        ports:
+            - "1431:1433" 
+        environment:
+          - ACCEPT_EULA=y
+          - MSSQL_SA_PASSWORD=AVeryComplex123Password!
+          - MSSQL_PID=Express
+    insurance_offers_sql_db:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        container_name: insurance_offers_sql_container
+        volumes:
+            - ./docker-volumes/OffersDb/data:/var/opt/mssql/data
+            - ./docker-volumes/OffersDb/log:/var/opt/mssql/log
+            - ./docker-volumes/OffersDb/secrets:/var/opt/mssql/secrets
+        ports:
+            - "1430:1433" 
+        environment:
+          - ACCEPT_EULA=y
+          - MSSQL_SA_PASSWORD=AVeryComplex123Password!
+          - MSSQL_PID=Express
+    external_factors_api:
+        image: rolandomesagdp/external_factors
+        pull_policy: always
+        container_name: external_factors_api_container
+        environment:
+            - "ConnectionStrings:ExternalFactorsDb=Server=external_factors_sql_db,1433;Database=ExternalFactorsDb;User Id=sa;Password=AVeryComplex123Password!;Encrypt=false;TrustServerCertificate=true;MultipleActiveResultSets=true"
+        depends_on: 
+            - external_factors_sql_db
+        ports:
+            - "5140:8080"
+    products_discounts_api:
+        image: rolandomesagdp/products_discounts
+        pull_policy: always
+        container_name: products_discounts_api_container
+        ports:
+            - "5242:8080"
+    insurance_offers_api:
+        image: rolandomesagdp/insurance_offers
+        pull_policy: always
+        container_name: insurance_offers_api_container
+        environment:
+            - "ConnectionStrings:OffersDb=Server=insurance_offers_sql_db,1433;Database=OffersDb;User Id=sa;Password=AVeryComplex123Password!;Encrypt=false;TrustServerCertificate=true;MultipleActiveResultSets=true"
+        depends_on: 
+            - insurance_offers_sql_db
+        ports:
+            - "5212:8080"
+    vehicle_insurance_pricer_api:
+        image: rolandomesagdp/insurance_pricer
+        pull_policy: always
+        container_name: vehicle_insurance_pricer_api_container
+        environment:
+            - Endpoints:ExternalFactorsApi=http://external_factors_api:8080
+            - Endpoints:ProductDiscountApi=http://products_discounts_api:8080
+            - Endpoints:InsuranceOffersApi=http://insurance_offers_api:8080
+        ports:
+            - "5103:8080"
