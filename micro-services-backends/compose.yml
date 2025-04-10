@@ -26,7 +26,7 @@ services:
           - MSSQL_SA_PASSWORD=AVeryComplex123Password!
           - MSSQL_PID=Express
     external_factors_api:
-        image: rolandomesagco/external_factors
+        image: rolandomesagdp/external_factors
         pull_policy: always
         container_name: external_factors_api_container
         environment:
@@ -36,13 +36,13 @@ services:
         ports:
             - "5140:8080"
     products_discounts_api:
-        image: rolandomesagco/products_discounts
+        image: rolandomesagdp/products_discounts
         pull_policy: always
         container_name: products_discounts_api_container
         ports:
             - "5242:8080"
     insurance_offers_api:
-        image: rolandomesagco/insurance_offers
+        image: rolandomesagdp/insurance_offers
         pull_policy: always
         container_name: insurance_offers_api_container
         environment:
@@ -52,7 +52,7 @@ services:
         ports:
             - "5212:8080"
     vehicle_insurance_pricer_api:
-        image: rolandomesagco/insurance_pricer
+        image: rolandomesagdp/insurance_pricer
         pull_policy: always
         container_name: vehicle_insurance_pricer_api_container
         environment:
