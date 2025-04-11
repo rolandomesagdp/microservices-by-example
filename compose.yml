@@ -67,12 +67,3 @@
         container_name: front_rmesa_container
         ports:
             - "4201:80"
-
-    # angular_front:
-    #     build:
-    #       context: ./micro-services-front
-    #       dockerfile: ./Dockerfile
-    #     image: front_rmesa_image:latest
-    #     container_name: front_rmesa_container
-    #     ports:
-    #         - "4201:80"

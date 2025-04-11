@@ -1,0 +1,19 @@
+<h3>Get a pricer for your vehicle insurance</h3>
+<form [formGroup]="driverForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label for="driver-Id">Driver Id</mat-label>
+    <input matInput id="driver-Id" type="text" formControlName="driverId">
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <mat-label for="years-of-experience">Years of experience</mat-label>
+    <input matInput id="years-of-experience" type="number" formControlName="yearsOfExperience">
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <mat-label for="driver-licence-points">Licence points</mat-label>
+    <input matInput id="driver-licence-points" type="number" formControlName="driverLicencePoints">
+  </mat-form-field>
+  <br />
+  <button type="submit" mat-stroked-button>Get offer</button>
+</form>
