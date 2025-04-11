@@ -36,7 +36,8 @@ export class InsurancePricerComponent {
   onSubmit(): void {
     const driver: Driver = this.driverForm.value;
     console.log(driver);
-    this.httpClient.post<InsuranceOffer>(`${environment.insurancePricerBaseUrl}/insurancePrice`, driver).pipe(
+    const url: string = `${environment.insurancePricerBaseUrl}/InsurancePrice`;
+    this.httpClient.post<InsuranceOffer>(url, driver).pipe(
       tap((offer: InsuranceOffer) => {
         console.log(offer);
       })

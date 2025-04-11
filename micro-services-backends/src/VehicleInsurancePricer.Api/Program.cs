@@ -6,7 +6,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "_myAllowSpecificOrigins",
+    options.AddPolicy(name: "AllowAllOriginsMethodsAndHeaders",
                       policy =>
                       {
                           policy.AllowAnyOrigin();
@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-
+app.UseCors("AllowAllOriginsMethodsAndHeaders");
 app.UseSwagger();
 app.UseSwaggerUI();
 
