@@ -18,6 +18,7 @@
   <button type="submit" mat-stroked-button>Get offer</button>
 </form>
 @if(offer) {
+  <br />
   <mat-card class="example-card" appearance="outlined">
     <mat-card-header>
       <mat-card-title>Here is your offer</mat-card-title>
@@ -31,7 +32,7 @@
       <p> Final Price: {{ offer.finalPrice | currency }}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button (click)="clearOffer()">Close</button>
+      <button mat-button (click)="clearOffer()">Clear</button>
     </mat-card-actions>
   </mat-card>
 }
