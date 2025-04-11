@@ -17,3 +17,21 @@
   <br />
   <button type="submit" mat-stroked-button>Get offer</button>
 </form>
+@if(offer) {
+  <mat-card class="example-card" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Here is your offer</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p> Client Id: {{ offer.clientId }}</p>
+      <p> Expedition Date: {{ offer.expeditionDate | date }}</p>
+      <p> Expiration Date: {{ offer.expirationDate | date }}</p>
+      <p> Base Price: {{ offer.basePrice | currency }}</p>
+      <p> Discount: {{ offer.discount }}%</p>
+      <p> Final Price: {{ offer.finalPrice | currency }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="clearOffer()">Close</button>
+    </mat-card-actions>
+  </mat-card>
+}
